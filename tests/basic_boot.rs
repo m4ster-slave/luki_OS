@@ -7,31 +7,19 @@
 use core::panic::PanicInfo;
 use luki_os::println;
 
-#[no_mangle]
+#[unsafe(no_mangle)] // don't mangle the name of this function
 pub extern "C" fn _start() -> ! {
-    println!("[+] SETUP");
-
-    #[cfg(test)]
     test_main();
 
     loop {}
 }
 
-// function is called withing normal operation should a panic occur
-#[cfg(not(test))]
-#[panic_handler]
-fn panic(info: &PanicInfo) -> ! {
-    println!("{}", info);
-    loop {}
-}
-
-#[cfg(test)]
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     luki_os::test_panic_handler(info)
 }
 
 #[test_case]
-fn trivial_assertion() {
-    assert_eq!(1, 1);
+fn test_println_simple_int() {
+    println!("TEST, printing something to the VGA buffer!");
 }
