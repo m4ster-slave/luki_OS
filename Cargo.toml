@@ -4,6 +4,11 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+volatile = "0.2.6"
+bootloader = {version = "0.9", features = ["map_physical_memory"]}
+lazy_static = {version = "1.0", features = ["spin_no_std"]}
+spin = "0.5.2"
+x86_64 = "0.14.2"
 
 [profile.dev]
 panic = "abort"
@@ -13,11 +18,8 @@ panic = "abort"
 
 [[bin]]
 name = "luki_os"
-test = false
+test = true
 bench = false
 
-[dependencies.bootloader]
-version = "0.9"
-features = ["map_physical_memory"]
-
-
+[package.metadata.bootimage]
+test-args = ["-device", "isa-debug-exit,iobase=0xf4,iosize=0x04"]
