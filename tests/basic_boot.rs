@@ -20,6 +20,6 @@ fn panic(info: &PanicInfo) -> ! {
 }
 
 #[test_case]
-fn test_println_simple_int() {
+fn test_println_simple_boot() {
     println!("TEST, printing something to the VGA buffer!");
 }
