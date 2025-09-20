@@ -18,7 +18,7 @@ pub extern "C" fn _start() -> ! {
 
     println!("NO CRASH ;)");
 
-    loop {}
+    luki_os::hlt_loop();
 }
 
 // function is called withing normal operation should a panic occur
@@ -26,7 +26,7 @@ pub extern "C" fn _start() -> ! {
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     println!("{}", info);
-    loop {}
+    luki_os::hlt_loop();
 }
 
 #[cfg(test)]
